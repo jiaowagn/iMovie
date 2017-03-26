@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :authenticate_user! , only: [:new]
+  before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
   def index
     @lists = List.all
   end
@@ -10,6 +10,11 @@ class ListsController < ApplicationController
 
   def edit
     @list = List.find(params[:id])
+
+    if current_user != @list.user
+      redirect_to root_path, alert: "You have no permission."
+    end
+
   end
 
   def new
@@ -18,7 +23,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
-    @list.user = current_user 
+    @list.user = current_user
     if @list.save
       redirect_to lists_path
     else
@@ -28,6 +33,11 @@ class ListsController < ApplicationController
 
   def update
     @list = List.find(params[:id])
+
+    if current_user != @list.user
+      redirect_to root_path, alert: "You have no permission."
+    end
+
     if @list.update(list_params)
       redirect_to lists_path, notice: "Update Success"
     else
@@ -37,6 +47,11 @@ class ListsController < ApplicationController
 
   def destroy
     @list = List.find(params[:id])
+
+    if current_user != @list.user
+      redirect_to root_path, alert: "You have no permission."
+    end
+    
     @list.destroy
     flash[:alert] = "Movie deleted"
     redirect_to lists_path
