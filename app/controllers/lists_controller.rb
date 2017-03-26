@@ -17,9 +17,11 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
-    @list.save
-
-    redirect_to lists_path
+    if @list.save
+      redirect_to lists_path
+    else
+      render :new
+    end 
   end
 
   def update
@@ -34,7 +36,7 @@ class ListsController < ApplicationController
     @list.destroy
     flash[:alert] = "Movie deleted"
     redirect_to lists_path
-  end 
+  end
 
   private
 
