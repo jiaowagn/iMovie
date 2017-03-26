@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :lists 
-  root 'welcome#index'
+  resources :lists
+  root 'lists#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
