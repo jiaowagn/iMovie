@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_list_and_check_permission, only: [:edit, :update, :destroy]
   def index
     @lists = List.all
   end
@@ -9,12 +10,6 @@ class ListsController < ApplicationController
   end
 
   def edit
-    @list = List.find(params[:id])
-
-    if current_user != @list.user
-      redirect_to root_path, alert: "You have no permission."
-    end
-
   end
 
   def new
@@ -32,12 +27,6 @@ class ListsController < ApplicationController
   end
 
   def update
-    @list = List.find(params[:id])
-
-    if current_user != @list.user
-      redirect_to root_path, alert: "You have no permission."
-    end
-
     if @list.update(list_params)
       redirect_to lists_path, notice: "Update Success"
     else
@@ -46,18 +35,20 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    @list = List.find(params[:id])
-
-    if current_user != @list.user
-      redirect_to root_path, alert: "You have no permission."
-    end
-    
     @list.destroy
     flash[:alert] = "Movie deleted"
     redirect_to lists_path
   end
 
   private
+
+  def find_list_and_check_permission
+    @list = List.find(params[:id])
+
+    if current_user != @list.user
+      redirect_to root_path, alert: "You have no permission."
+    end
+  end
 
   def list_params
     params.require(:list).permit(:title, :profile)
