@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  before_action :authenticate_user! , only: [:new]
   def index
     @lists = List.all
   end
@@ -30,7 +31,7 @@ class ListsController < ApplicationController
       redirect_to lists_path, notice: "Update Success"
     else
       render :edit
-    end 
+    end
   end
 
   def destroy
