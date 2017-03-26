@@ -27,6 +27,13 @@ class ListsController < ApplicationController
     @list.update(list_params)
 
     redirect_to lists_path, notice: "Update Success"
+  end
+
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+    flash[:alert] = "Movie deleted"
+    redirect_to lists_path
   end 
 
   private
