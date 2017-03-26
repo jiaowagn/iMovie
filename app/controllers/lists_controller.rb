@@ -9,7 +9,7 @@ class ListsController < ApplicationController
 
   def edit
     @list = List.find(params[:id])
-  end 
+  end
 
   def new
     @list = List.new
@@ -21,6 +21,13 @@ class ListsController < ApplicationController
 
     redirect_to lists_path
   end
+
+  def update
+    @list = List.find(params[:id])
+    @list.update(list_params)
+
+    redirect_to lists_path, notice: "Update Success"
+  end 
 
   private
 
