@@ -5,5 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :lists
-  has_many :reviews 
+  has_many :reviews
+  has_many :list_relationships
+  has_many :participated_lists, :through => :list_relationships, :source => :list 
 end
