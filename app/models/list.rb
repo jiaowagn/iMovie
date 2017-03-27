@@ -3,5 +3,5 @@ class List < ApplicationRecord
   has_many :reviews
   validates :title, presence: true
   has_many :list_relationships
-  has_many :members, throuth: :list_relationships, source: :user 
+  has_many :members, through: :list_relationships, source: :user 
 end
