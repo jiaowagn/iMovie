@@ -1,5 +1,14 @@
 <div class="col-md-12">
   <div class="group">
+
+    <span class="pull-right">
+      <% if current_user && current_user.is_member_of?(@list) %>
+        <label class="label label-success">收藏影评</label>
+      <% else %>
+        <label class="label label-warning">您未收藏该影片</label>
+      <% end %>
+    </span>
+
     <%= link_to("Write a review", new_list_review_path(@list), class: "btn btn-default pull-right")%>
     <% if current_user && current_user == @list.user %>
     <%= link_to("Edit", edit_list_path(@list), class: "btn btn-primary pull-right")%>
