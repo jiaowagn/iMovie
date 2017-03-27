@@ -11,5 +11,14 @@ class User < ApplicationRecord
 
   def is_member_of?(list)
     participated_lists.include?(list)
+  end
+
+  def join!(list)
+    participated_lists << list
+  end
+
+  def quit!(list)
+    participated_lists.delete(list)
   end 
+
 end
