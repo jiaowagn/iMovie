@@ -21,6 +21,7 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
     @list.user = current_user
     if @list.save
+      current_user.join!(@list)
       redirect_to lists_path
     else
       render :new
@@ -64,7 +65,7 @@ class ListsController < ApplicationController
     end
 
     redirect_to list_path(@list)
-  end 
+  end
 
   private
 
