@@ -1,0 +1,13 @@
+<tr>
+  <td>#</td>
+  <td><%= link_to(list.title, list_path(list)) %></td>
+  <td><%= render_list_profile(list) %></td>
+  <td><%= list.user.email %></td>
+  <td>
+    <% if current_user && current_user == list.user %>
+      <%= link_to("Edit", edit_list_path(list), class: "btn btn-sm btn-default")%>
+      <%= link_to("Delete", list_path(list), class: "btn btn-sm btn-default",
+                  method: :delete, data: { confirm: "Are you sure?"}) %>
+    <% end %>
+  </td>
+</tr>
