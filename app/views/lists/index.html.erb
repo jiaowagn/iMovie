@@ -16,7 +16,7 @@
       <tr>
         <td>#</td>
         <td><%= link_to(list.title, list_path(list)) %></td>
-        <td><%= list.profile %></td>
+        <td><%= simple_format(list.profile) %></td>
         <td><%= list.user.email %></td>
         <td>
           <% if current_user && current_user == list.user %>
