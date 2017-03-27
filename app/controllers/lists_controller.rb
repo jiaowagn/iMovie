@@ -7,7 +7,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @reviews = @list.reviews.order("created_at DESC")
+    @reviews = @list.reviews.recent 
   end
 
   def edit
