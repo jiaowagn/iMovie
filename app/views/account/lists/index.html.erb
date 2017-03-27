@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <h2 class="text-center">我收藏的影片</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th> # </th>
+        <th>Title</th>
+        <th>Profile</th>
+        <th>Review Count</th>
+        <th>Last Update </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @lists.each do |list| %>
+        <tr>
+          <td> # </td>
+          <td><%= link_to(list.title, list_path(list)) %></td>
+          <td><%= list.profile %></td>
+          <td><%= list.reviews.count %></td>
+          <td><%= list.updated_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
